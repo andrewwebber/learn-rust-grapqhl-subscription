@@ -1,0 +1,42 @@
+[package]
+name = "wss"
+version = "0.1.0"
+authors = ["andrew webber (personal) <andrewvwebber@googlemail.com>"]
+edition = "2018"
+
+[dev-dependencies]
+tokio-test = "*"
+
+[dependencies.openssl]
+version = "0.10.30"
+features = [
+    "vendored"
+]
+
+[dependencies.reqwest]
+version = "0.10.4"
+default-features = false
+features = ["rustls-tls", "json"]
+
+
+[dependencies]
+async-graphql = "2.1.6"
+async-graphql-actix-web = "2.1.6"
+actix-web = { version = "^3"}
+actix-rt = "1"
+actix-cors = "^0.5"
+futures = "0.3.8"
+async-trait = "0.1.41"
+dotenv = "0.15.0"
+envy = "0.4.1"
+chrono = { default_features = false, features = ["std"], version = "0.4.15" }
+bytes = "0.5.6"
+tokio = { version = "0.2", features = ["full"] }
+serde = { version="=1.0.118", features = ["derive"] }
+serde_json = "1.0.56"
+log = "0.4.11"
+uuid = { version = "0.8.1", features = ["serde", "v4"] }
+http = "0.2.1"
+tokio-stream = "0.1.5"
+async-stream = "0.3.1"
+futures-util = "0.3.14"
