@@ -30,12 +30,35 @@ struct Subscription;
 impl Subscription {
     async fn integers(&self, #[graphql(default = 1)] step: i32) -> impl Stream<Item = i32> {
         stream! {
-            for i in 0..10{
+            let mut i = Integer{state: 0};
+            loop{
+                i.increment();
                 delay_for(Duration::from_secs(2)).await;
-                println!("integer {}", i);
-                yield i;
+                println!("integer {:#?}", i);
+                yield i.value();
             }
         }
+    }
+}
+
+#[derive(Debug)]
+struct Integer {
+    state: i32,
+}
+
+impl Integer {
+    fn value(&self) -> i32 {
+        self.state
+    }
+
+    fn increment(&mut self) {
+        self.state += 1
+    }
+}
+
+impl Drop for Integer {
+    fn drop(&mut self) {
+        println!("Integer dropped - {:#?}", &self);
     }
 }
 
